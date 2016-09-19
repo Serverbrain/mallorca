@@ -1,0 +1,8 @@
+FROM gliderlabs/alpine:3.3
+MAINTAINER Serverbrain
+COPY callorca.c /orca/callorca.c
+COPY mallorca.c /orca/mallorca.c
+COPY orca.sh /orca/orca.sh
+RUN apk --no-cache add bash gcc musl-dev 
+RUN cd /orca && gcc -o mallorca mallorca.c && gcc -o callorca callorca.c
+CMD /orca/orca.sh 128 15 /orca/callorca
